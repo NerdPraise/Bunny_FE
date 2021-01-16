@@ -1,0 +1,20 @@
+.tag {
+    height: 46px;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 7px;
+    font-size: 13px;
+    width: 100%;
+    margin-bottom: 6px;
+    list-style-type: none;
+    word-wrap: break-word;
+    color: white
+}
+
+.icon i {
+    font-size: 16px;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 1000;
+}

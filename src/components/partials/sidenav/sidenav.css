@@ -1,0 +1,56 @@
+.sideNav {
+    left: 0;
+    position: fixed;
+    height: 100%;
+    background-size: cover;
+    padding-top: 10px;
+    transition: 0.5s;
+    background: url("../../../assets/images/sidebar.jpg") center no-repeat;
+    display: block;
+    z-index: 100;
+}
+
+.hide-nav {
+    width: 50px;
+}
+
+.show-nav {
+    width: 270px !important;
+}
+
+.pe-s {
+    font-size: 28px;
+    float: left;
+    width: 30px;
+    margin-right: 15px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.sidehead li, .sidehead li span {
+    font-size: 12px;
+    font-weight: 600;
+    list-style: none;
+    text-align: left;
+    color: #fff;
+    line-height: 30px;
+    padding: 10px 10px;
+}
+
+.sidehead li:hover, .sidehead li:active {
+    background: hsla(0, 0%, 100%, .23);
+    border-radius: 5px;
+}
+
+.sidehead ul {
+    margin-right: 10px;
+}
+
+.sidehead li a {
+    text-decoration: none;
+    padding: 5px 15px;
+}
+
+.border-w {
+    border-top: 2px solid white;
+}

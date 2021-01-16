@@ -1,0 +1,10 @@
+.blurbs {
+    background-color: white;
+    border-radius: 15px;
+    overflow: auto;
+    height: 490px
+}
+
+.border-b {
+    border-bottom: 2px solid black;
+}
