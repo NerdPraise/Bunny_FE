@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { logInUser, registerUser, getUserProfile, setUserToken } from '../../utils'
 
 
@@ -83,7 +84,7 @@ const Register = (props) => {
                                     </div>
 
                                     <div className="d-flex justify-content-between pt-4">
-                                        <button className="btn btn-outline-secondary btn-light">Log in</button>
+                                        <Link to="/login" className="btn btn-outline-secondary btn-light">Log in</Link>
                                         <button type="submit" href="signup.html"
                                             className="btn btn-light btn-outline-secondary ">Sign Up</button>
                                     </div>

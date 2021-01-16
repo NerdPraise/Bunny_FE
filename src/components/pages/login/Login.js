@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { logInUser, getUserProfile, setUserToken } from '../../utils'
 
 
@@ -49,11 +50,11 @@ const Login = (props) => {
                                     <div className="form-group">
                                         <input type="text"
                                             className="form-control border-top-0 rounded-0 border-right-0 border-left-0 mb-5"
-                                            name="username" onChange={e => setUsername(e.target.value)}
+                                            name="username" required onChange={e => setUsername(e.target.value)}
                                             placeholder="Username" />
                                     </div>
                                     <div className="form-group">
-                                        <input type="password" onChange={e => setPassword(e.target.value)}
+                                        <input type="password" required onChange={e => setPassword(e.target.value)}
                                             className="form-control border-top-0 rounded-0 border-right-0 border-left-0 mb-5"
                                             placeholder="Password" />
                                     </div>
@@ -69,8 +70,8 @@ const Login = (props) => {
                                     </div>
                                     <div className="d-flex justify-content-between pt-4">
                                         <button type="submit" className="btn btn-outline-secondary btn-light">Log in</button>
-                                        <a href="signup.html"
-                                            className="btn btn-light btn-outline-secondary ">Sign Up</a>
+                                        <Link to='/register'
+                                            className="btn btn-light btn-outline-secondary ">Sign Up</Link>
                                     </div>
                                 </form>
                             </div>
