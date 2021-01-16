@@ -1,3 +1,4 @@
+// const BASE_URL = 'http://localhost:8000/v1/'
 const BASE_URL = 'https://bunny-todo.herokuapp.com/v1/'
 
 export default function getUserToken() {
@@ -125,5 +126,16 @@ export async function updateTask(task_id, form_data) {
             'Authorization': 'Bearer ' + token
         },
         body: form_data
+    })
+}
+
+export async function registerUser(data) {
+    data = JSON.stringify(data)
+    return await fetch(BASE_URL + 'user/create/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: data
     })
 }
