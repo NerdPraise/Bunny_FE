@@ -54,3 +54,8 @@
 .border-w {
     border-top: 2px solid white;
 }
+
+.list-none {
+    list-style: none;
+    padding-left: 0;
+}

@@ -28,8 +28,8 @@ const SideNav = (props) => {
             <div className="border-w mt-2"></div>
 
             <div className='mt-4'>
-                <div className={!props.show ? 'text-center' : 'hide'}>
-                    <ul className="mx-2" >
+                <div className={!props.show ? 'px-1' : 'hide d-none'}>
+                    <ul className="list-none text-light">
                         <li>
                             <Link to="/user">
                                 <i className="pe-7s-users  text-light pe-s font-weight-bold" />
@@ -43,9 +43,9 @@ const SideNav = (props) => {
                         <li><i className="pe-7s-science my-2 text-light pe-s font-weight-bold" /></li>
                         <li><i className="pe-7s-graph my-2 text-light pe-s font-weight-bold" /></li>
                     </ul>
-                </div>
 
-                <div className={props.show ? 'mx-4' : 'hide'}>
+                </div>
+                <div className={props.show ? 'mx-4' : 'hide d-none'}>
                     <ul className="sidehead text-light">
                         <li>
                             <Link to="/user">
@@ -74,7 +74,8 @@ const SideNav = (props) => {
 
                     </ul>
                     <h5>
-                        <Link href="#" onClick={logOut}>Log out </Link></h5>
+                        <Link href="#" onClick={logOut}>Log out </Link>
+                    </h5>
                 </div>
 
             </div>
