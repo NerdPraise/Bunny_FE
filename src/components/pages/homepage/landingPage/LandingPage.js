@@ -10,7 +10,6 @@ const LandingPage = (props) => {
 
 
     const data = JSON.parse(getUserProfile())
-    console.log(data)
     let username = data.username
     let id = data.id
 

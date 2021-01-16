@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Tag from '../../../partials/tags/tag/Tag';
 import Tags from '../../../partials/tags/Tags';
+import PopUpModal from '../../../partials/popupmodal/PopUpModal';
 import Blurbs from '../../../hoc/blurbs/Blurbs';
-import { getAllUsers, getUserToDO, deleteUser, deleteTask } from '../../../utils'
+import { getAllUsers, getUserToDO, deleteUser, deleteTask, updateTask, updateUser } from '../../../utils'
 
 
 const UserPage = (props) => {
     const [users, setUsers] = useState([])
-    const [userTask, setUserTask] = useState('')
+    const [userTask, setUserTask] = useState([])
+    const [showModal, setshowModal] = useState(false)
+    const [popUpdData, setPopUpdData] = useState({
+        heading: "",
+        fInput: "",
+        sInput: ""
+    })
+    useEffect(() => {
+
+        getAllUsers().then(data => data.json()).then(data => {
+            setUsers(data)
+        })
+    }, [setUsers]
+    )
 
     const handleUserTasks = async (id) => {
         getUserToDO(id).then(response => response.json()).then(data => {
@@ -39,27 +53,72 @@ const UserPage = (props) => {
         }
         setUserTask(newUserTask)
     }
-    const handleUserUpdate = async (task_id) => {
-
+    const handleUserUpdateModal = (user_id) => {
+        setPopUpdData({
+            heading: "Update User",
+            fInput: "Username",
+            sInput: "Password",
+            onSumbit: updateUserAction,
+            iden: user_id
+        })
+        setshowModal(true)
+    }
+    const handleTaskUpdateModal = (task_id) => {
+        setPopUpdData({
+            heading: "Update Task",
+            fInput: "Description",
+            onSumbit: updateTaskAction,
+            iden: task_id
+        })
+        setshowModal(true)
     }
 
-    let userTaskList = <Tags tags={userTask} delete={handleDeleteTask} color="green" />
+    const updateTaskAction = async (task_id, data) => {
+        await updateTask(task_id, data)
+        const newUserTasks = userTask.slice(); //to copy the array
+        for (let i of newUserTasks) {
+            if (i.id == task_id) {
+                let newData = data.split("&")
+                i['description'] = newData[0].split("=")[1]
+                break;
+            }
+        }
+        setUsers(newUserTasks)
+        setshowModal(false)
+    }
+    const updateUserAction = async (user_id, data) => {
+        await updateUser(user_id, data)
+        const newUsers = users.slice(); //to copy the array
+        for (let i of newUsers) {
+            if (i.id == user_id) {
+                let newData = data.split("&")
+                i['username'] = newData[0].split("=")[1]
+                break;
+            }
+        }
+        setUsers(newUsers)
+        setshowModal(false)
+    }
 
-    useEffect(() => {
 
-        getAllUsers().then(data => data.json()).then(data => {
-            setUsers(data)
-        })
-    }, [setUsers])
+    const handleModalShow = () => {
+        setshowModal(!showModal)
+    }
+    let userTaskList = <Tags tags={userTask} update={handleTaskUpdateModal} delete={handleDeleteTask} color="green" />
+
+
 
 
     return (
         <div className='row'>
+            <PopUpModal show={showModal} heading={popUpdData.heading}
+                hide={handleModalShow} fInput={popUpdData.fInput} sInput={popUpdData.sInput}
+                submitAction={popUpdData.onSumbit} iden={popUpdData.iden} />
             <Blurbs title="USERS">
-                <UserTag tags={users} update={handleUserUpdate} click={handleUserTasks} delete={handleDeleteUser} color="purple" />
+                <UserTag tags={users} update={handleUserUpdateModal} click={handleUserTasks} delete={handleDeleteUser} color="purple" />
             </Blurbs>
             <Blurbs title="USER TASK">
-                {userTask ? userTaskList : <i className="text-secondary">Nothing to see, click on a user</i>}
+                {userTask.length ? userTaskList : <i className="text-secondary">Nothing to see, click on a user with task</i>}
             </Blurbs>
         </div>
 

@@ -46,9 +46,9 @@ export async function getUserToDO(user_id) {
 }
 
 export function getUserProfile() {
-    let user_details = localStorage.getItem('user_details')
-    if (user_details) {
-        return user_details
+    let userDetails = localStorage.getItem('userDetails')
+    if (userDetails) {
+        return userDetails
     }
     let token = getUserToken()
     return fetch(BASE_URL + 'user/profile', {
@@ -63,8 +63,11 @@ export function getUserProfile() {
             return data
         })
 }
-export function setUserProfile(user_details) {
-    localStorage.setItem('user_details', JSON.stringify(user_details))
+export function setUserProfile(userDetails) {
+    if (userDetails.id) {
+        localStorage.setItem('userDetails', JSON.stringify(userDetails))
+    }
+
 }
 
 export async function getAllUsers() {
@@ -97,5 +100,30 @@ export async function deleteTask(task_id) {
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer ' + token
         }
+    })
+}
+
+export async function updateUser(user_id, form_data) {
+    let token = getUserToken()
+    return await fetch(BASE_URL + 'user/' + user_id.toString(), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Authorization': 'Bearer ' + token
+        },
+        body: form_data
+
+    })
+}
+
+export async function updateTask(task_id, form_data) {
+    let token = getUserToken()
+    return await fetch(BASE_URL + 'tasks/' + task_id.toString(), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Authorization': 'Bearer ' + token
+        },
+        body: form_data
     })
 }

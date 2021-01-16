@@ -12,11 +12,11 @@ function App() {
   return (
     <Router history={history}>
       <div className="bg-grey">
-        <HomePage />
-        {/* <Switch>
+        {/* <HomePage /> */}
+        <Switch>
           <Route path='/login' exact component={Login} />
-          <ProtectedRoute path='/' exact component={HomePage} />
-        </Switch> */}
+          <ProtectedRoute path='/' component={HomePage} />
+        </Switch>
       </div>
     </Router>
 

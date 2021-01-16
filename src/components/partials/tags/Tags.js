@@ -7,6 +7,7 @@ const Tags = (props) => {
             return (
                 <div className="pb-2">
                     <Tag name={tag.description} color={props.color} key={tag.id}
+                        update={() => props.update(tag.id)}
                         delete={() => props.delete(tag.id)} />
                 </div>
             )
