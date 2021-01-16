@@ -52,7 +52,7 @@ const UserPage = (props) => {
     const handleDeleteTask = async (task_id) => {
         await deleteTask(task_id)
         const newUserTask = userTask.slice(); //to copy the array
-        for (let i of users) {
+        for (let i of newUserTask) {
             if (i.id == task_id) {
                 let index = newUserTask.indexOf(i)
                 newUserTask.splice(index, 1);
@@ -91,7 +91,7 @@ const UserPage = (props) => {
                 break;
             }
         }
-        setUsers(newUserTasks)
+        setUserTask(newUserTasks)
         setshowModal(false)
     }
     const updateUserAction = async (user_id, data) => {
