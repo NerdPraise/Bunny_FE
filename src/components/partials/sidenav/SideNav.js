@@ -35,7 +35,11 @@ const SideNav = (props) => {
                                 <i className="pe-7s-users  text-light pe-s font-weight-bold" />
                             </Link>
                         </li>
-                        <li><i className="pe-7s-timer my-2 text-light pe-s font-weight-bold" /></li>
+                        <li>
+                            <Link to="/">
+                                <i className="pe-7s-back-2 my-2 text-light pe-s font-weight-bold" />
+                            </Link>
+                        </li>
                         <li><i className="pe-7s-science my-2 text-light pe-s font-weight-bold" /></li>
                         <li><i className="pe-7s-graph my-2 text-light pe-s font-weight-bold" /></li>
                     </ul>
@@ -50,9 +54,9 @@ const SideNav = (props) => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/user">
-                                <i className="pe-7s-timer  text-light pe-s font-weight-bold" />
-                                <span className="ml-4 h6  text-light">TEXT</span>
+                            <Link to="/">
+                                <i className="pe-7s-back-2  text-light pe-s font-weight-bold" />
+                                <span className="ml-4 h6  text-light">BACK</span>
                             </Link>
                         </li>
                         <li>

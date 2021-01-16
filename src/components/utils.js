@@ -1,5 +1,5 @@
-// const BASE_URL = 'http://localhost:8000/v1/'
-const BASE_URL = 'https://bunny-todo.herokuapp.com/v1/'
+const BASE_URL = 'http://localhost:8000/v1/'
+// const BASE_URL = 'https://bunny-todo.herokuapp.com/v1/'
 
 export default function getUserToken() {
     try {
@@ -37,7 +37,7 @@ export async function logInUser(userData) {
 
 export async function getUserToDO(user_id) {
     let token = getUserToken()
-    return await fetch(BASE_URL + 'task/' + user_id.toString(), {
+    return await fetch(BASE_URL + 'task/' + user_id.toString() + '/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -130,11 +130,22 @@ export async function updateTask(task_id, form_data) {
 }
 
 export async function registerUser(data) {
-    data = JSON.stringify(data)
     return await fetch(BASE_URL + 'user/create/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(data)
+    })
+}
+
+export async function createNewtask(user_id, data) {
+    let token = getUserToken()
+    return await fetch(BASE_URL + 'task/' + user_id.toString() + '/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Authorization': 'Bearer ' + token
         },
         body: data
     })

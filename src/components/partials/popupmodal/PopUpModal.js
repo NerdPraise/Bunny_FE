@@ -35,8 +35,8 @@ const PopUpModal = (props) => {
                         <label> {props.fInput}</label>
                         <input type="text" className="form-control mb-2" required name={smallFInput}
                             onChange={e => setFInfo(e.target.value)} />
-                        {props.sInput ? <div><label> {props.sInput}<small> (not required)</small></label>
-                            <input type="text" className="form-control" name={smallSInput}
+                        {props.sInput ? <div><label> {props.sInput}<small></small></label>
+                            <input type="text" className="form-control" required name={smallSInput}
                                 onChange={e => setSInfo(e.target.value)} /></div> : ''}
                     </Modal.Body>
                     <Modal.Footer>

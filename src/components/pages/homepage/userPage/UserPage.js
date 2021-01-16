@@ -3,12 +3,15 @@ import Tag from '../../../partials/tags/tag/Tag';
 import Tags from '../../../partials/tags/Tags';
 import PopUpModal from '../../../partials/popupmodal/PopUpModal';
 import Blurbs from '../../../hoc/blurbs/Blurbs';
-import { getAllUsers, getUserToDO, deleteUser, deleteTask, updateTask, updateUser } from '../../../utils'
+import './userpage.css';
+import { getAllUsers, getUserToDO, deleteUser, deleteTask, updateTask, updateUser } from '../../../utils';
+import { createNewtask } from '../../../utils';
 
 
 const UserPage = (props) => {
     const [users, setUsers] = useState([])
     const [userTask, setUserTask] = useState([])
+    const [currentUserId, setCurrentUserId] = useState()
     const [showModal, setshowModal] = useState(false)
     const [popUpdData, setPopUpdData] = useState({
         heading: "",
@@ -23,9 +26,14 @@ const UserPage = (props) => {
     }, [setUsers]
     )
 
+    const handleModalShow = () => {
+        setshowModal(!showModal)
+    }
+
     const handleUserTasks = async (id) => {
         getUserToDO(id).then(response => response.json()).then(data => {
             setUserTask(data)
+            setCurrentUserId(id)
         })
     }
     const handleDeleteUser = async (user_id) => {
@@ -99,15 +107,34 @@ const UserPage = (props) => {
         setUsers(newUsers)
         setshowModal(false)
     }
-
-
-    const handleModalShow = () => {
-        setshowModal(!showModal)
+    const addTaskModalhandler = () => {
+        setPopUpdData({
+            heading: "Add new Task",
+            fInput: "Description",
+            onSumbit: addTaskhandler,
+            iden: currentUserId
+        })
+        setshowModal(true)
     }
-    let userTaskList = <Tags tags={userTask} update={handleTaskUpdateModal} delete={handleDeleteTask} color="green" />
+
+    const addTaskhandler = async (currentUserId, form_data) => {
+        await createNewtask(currentUserId, form_data).then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+        }).then(data => {
+            let newTasks = [...userTask, data]
+            setUserTask(newTasks)
+            setshowModal(false)
+
+        })
+    }
 
 
 
+
+    let userTaskList = <Tags tags={userTask} update={handleTaskUpdateModal}
+        delete={handleDeleteTask} color="green" />
 
     return (
         <div className='row'>
@@ -119,6 +146,7 @@ const UserPage = (props) => {
             </Blurbs>
             <Blurbs title="USER TASK">
                 {userTask.length ? userTaskList : <i className="text-secondary">Nothing to see, click on a user with task</i>}
+                {userTask.length ? <i onClick={addTaskModalhandler}> Add tasks</i> : ''}
             </Blurbs>
         </div>
 
