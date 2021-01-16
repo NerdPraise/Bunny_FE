@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { logInUser, getUserProfile, setUserToken } from '../../utils'
+import { logInUser, getUserProfile, setUserToken } from '../../utils';
+import { Spinner } from "react-bootstrap";
+
 
 
 const Login = (props) => {
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [error, setError] = useState()
+    const [loader, setLoader] = useState(false)
     // const history = useHistory();
 
     const redirect = (path) => {
@@ -14,6 +17,7 @@ const Login = (props) => {
     };
 
     const handleSubmit = async e => {
+        setLoader(true)
         e.preventDefault();
         try {
 
@@ -22,6 +26,9 @@ const Login = (props) => {
             });
             if (!token.access) {
                 setError(token.detail)
+                setLoader(false)
+
+                return
             } else {
                 setUserToken(token)
                 await getUserProfile()
@@ -29,6 +36,8 @@ const Login = (props) => {
             }
         } catch (e) {
             setError('Something wrong happened')
+            setLoader(false)
+
 
         }
     }
@@ -69,7 +78,8 @@ const Login = (props) => {
 
                                     </div>
                                     <div className="d-flex justify-content-between pt-4">
-                                        <button type="submit" className="btn btn-outline-secondary btn-light">Log in</button>
+                                        {!loader ? <button type="submit" className="btn btn-outline-secondary btn-light">Log in</button>
+                                            : <button type="submit" className="btn btn-outline-secondary btn-light"><Spinner animation="border" size="md" variant="dark" /></button>}
                                         <Link to='/register'
                                             className="btn btn-light btn-outline-secondary ">Sign Up</Link>
                                     </div>
