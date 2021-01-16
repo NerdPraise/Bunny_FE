@@ -75,7 +75,7 @@ const Register = (props) => {
                                     <div className="form-group">
                                         <input type="password" onChange={e => setPassword(e.target.value)} required
                                             className="form-control border-top-0 rounded-0 border-right-0 border-left-0 mb-5"
-                                            placeholder="Password" />
+                                            placeholder="Password (8 min.)" />
                                     </div>
                                     <div className="form-group">
                                         <input type="password" onChange={e => setPassword2(e.target.value)} required

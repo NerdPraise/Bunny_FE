@@ -106,8 +106,6 @@ const LandingPage = (props) => {
                 <Tags tags={tags} click={handleUpdate} update={handleTaskUpdateModal}
                     delete={handleDeleteTask} color=" rgb(99, 214, 99)" />
             </Blurbs>
-            <Blurbs title="DO" click={handleUpdate} icon="<div>jdjd</div>">
-            </Blurbs>
         </div >
     );
 };
