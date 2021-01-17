@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { logInUser, registerUser, getUserProfile, setUserToken } from '../../utils'
+import { logInUser, registerUser, getUserProfile, setUserToken } from '../../utils';
+import { Spinner } from 'react-bootstrap';
 
 
 const Register = (props) => {
@@ -8,8 +9,7 @@ const Register = (props) => {
     const [password, setPassword] = useState()
     const [password2, setPassword2] = useState()
     const [error, setError] = useState()
-    // const history = useHistory();
-
+    const [loader, setLoader] = useState(false)
     const redirect = (path) => {
         props.history.push(path);
     };
@@ -19,8 +19,11 @@ const Register = (props) => {
 
         const form = document.getElementById("SignUpForm");
         form.checkValidity()
+        setLoader(true)
+
         if (password != password2) {
             setError("Password is not the same")
+            setLoader(false)
             return
         }
         let formData = {
@@ -31,6 +34,7 @@ const Register = (props) => {
             let response = await registerUser(formData)
             if (!response.ok) {
                 setError("Username already exists")
+                setLoader(false)
                 return
             }
             const token = await logInUser({
@@ -47,7 +51,7 @@ const Register = (props) => {
 
         } catch (e) {
             setError('Something wrong happened')
-
+            setLoader(false)
         }
     }
 
@@ -85,8 +89,8 @@ const Register = (props) => {
 
                                     <div className="d-flex justify-content-between pt-4">
                                         <Link to="/login" className="btn btn-outline-secondary btn-light">Log in</Link>
-                                        <button type="submit" href="signup.html"
-                                            className="btn btn-light btn-outline-secondary ">Sign Up</button>
+                                        {!loader ? <button type="submit" className="btn btn-outline-secondary ">Sign Up</button>
+                                            : <button type="submit" className="btn btn-outline-secondary "><Spinner animation="border" size="md" variant="dark" /></button>}
                                     </div>
                                 </form>
                             </div>

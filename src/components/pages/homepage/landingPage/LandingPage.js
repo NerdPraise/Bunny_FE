@@ -3,7 +3,7 @@ import Tags from '../../../partials/tags/Tags';
 import Blurbs from '../../../hoc/blurbs/Blurbs';
 import { getUserProfile, createNewtask, getUserToDO } from '../../../utils';
 import PopUpModal from '../../../partials/popupmodal/PopUpModal';
-import { getAllUsers, deleteUser, deleteTask, updateTask, updateUser } from '../../../utils';
+import { deleteTask, updateTask } from '../../../utils';
 
 
 
@@ -18,12 +18,8 @@ const LandingPage = (props) => {
 
 
     const data = JSON.parse(getUserProfile())
-    let username = data.username
     let id = data.id
 
-    const handleUpdate = (id) => {
-
-    }
     const handleModalShow = () => {
         setshowModal(!showModal)
     }
@@ -98,12 +94,12 @@ const LandingPage = (props) => {
                 hide={handleModalShow} fInput={popUpdData.fInput} sInput={popUpdData.sInput}
                 submitAction={popUpdData.onSumbit} iden={popUpdData.iden} />
             <Blurbs title="DO" icon="pe-7s-star">
-                <Tags tags={tags} click={handleUpdate} update={handleTaskUpdateModal}
+                <Tags tags={tags} update={handleTaskUpdateModal}
                     delete={handleDeleteTask} color="#eb5d66" />
                 <i onClick={addTaskModalhandler}> Add tasks</i>
             </Blurbs>
             <Blurbs title="Done" icon="<div>jdjd</div>">
-                <Tags tags={tags} click={handleUpdate} update={handleTaskUpdateModal}
+                <Tags tags={tags} update={handleTaskUpdateModal}
                     delete={handleDeleteTask} color=" rgb(99, 214, 99)" />
             </Blurbs>
         </div >
