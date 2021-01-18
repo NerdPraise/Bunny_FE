@@ -1,5 +1,4 @@
-// const BASE_URL = 'https://bunny-todo.herokuapp.com/v1/'
-const BASE_URL = 'http://localhost:8000/v1/'
+const BASE_URL = 'https://bunny-todo.herokuapp.com/v1/'
 
 
 export default function getUserToken() {
