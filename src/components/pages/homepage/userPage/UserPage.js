@@ -65,7 +65,7 @@ const UserPage = (props) => {
         setPopUpdData({
             heading: "Update User",
             fInput: "Username",
-            sInput: "Password (8 min.)",
+            sInput: "Password",
             onSumbit: updateUserAction,
             iden: user_id
         })
